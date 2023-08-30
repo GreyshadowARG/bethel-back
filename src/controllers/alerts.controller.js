@@ -316,6 +316,7 @@ export const getTurnos = async (req, res, next) => {
             nombre: `${item.nombre}`,
             tipo_turno: item.tipo_turno,
             lugar_turno: item.lugar_turno,
+            hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
           });
         } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
@@ -324,6 +325,7 @@ export const getTurnos = async (req, res, next) => {
             nombre: `${item.nombre}`,
             tipo_turno: item.tipo_turno,
             lugar_turno: item.lugar_turno,
+            hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
           });
         } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
@@ -332,6 +334,7 @@ export const getTurnos = async (req, res, next) => {
             nombre: `${item.nombre}`,
             tipo_turno: item.tipo_turno,
             lugar_turno: item.lugar_turno,
+            hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
           });
         }
@@ -342,6 +345,7 @@ export const getTurnos = async (req, res, next) => {
             nombre: `${item.nombre}`,
             tipo_turno: item.tipo_turno,
             lugar_turno: item.lugar_turno,
+            hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
           });
         }
