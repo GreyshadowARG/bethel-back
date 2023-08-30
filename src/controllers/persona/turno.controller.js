@@ -66,12 +66,11 @@ export const getTurnosByPersona = async (req, res, next) => {
 };
 
 export const eliminarTurno = async (req, res, next) => {
-  const { idTurno } = req.params;
-
   try {
-    const turno = await Turno.findOneAndDelete(idTurno)
+    const { idTurno } = req.params;
+    const turno = await Turno.findByIdAndDelete(idTurno)
+    
     res.status(200).json(turno);
-
   } catch (err) {
     next(err);
   }

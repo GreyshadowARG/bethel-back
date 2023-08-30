@@ -36,7 +36,6 @@ export const newTratamiento = async (req, res, next) => {
     await Persona.findByIdAndUpdate(id, {
       $push: { tratamientos: newTratamiento },
     });
-    console.log("El tratamiento se registró correctamente.");
   } catch (err) {
     next(err);
   }
@@ -67,5 +66,4 @@ export const eliminarTratamiento = async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-  console.log("Tratamiento eliminado");
 };

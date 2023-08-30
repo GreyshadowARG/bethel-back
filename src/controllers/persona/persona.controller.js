@@ -76,14 +76,16 @@ export const newPersona = async (req, res, next) => {
   } = req.body;
 
   const formatDate = (fecha) => {
-    const stringDay = String(fecha);
-    const daySplit = stringDay.split("-");
-    const day = daySplit[2];
-    const month = daySplit[1];
-    const year = daySplit[0];
-    ;
-
-    return `${day}-${month}-${year}`;
+    if(fecha != ""){
+      const stringDay = String(fecha);
+      const daySplit = stringDay.split("-");
+      const day = daySplit[2];
+      const month = daySplit[1];
+      const year = daySplit[0];
+  
+      return `${day}-${month}-${year}`;
+    }
+    return fecha
   };
 
   try {
@@ -173,7 +175,6 @@ export const newPersona = async (req, res, next) => {
     });
     const personaCargada = await newPersona.save();
 
-    console.log(`Se ha cargado a ${nombre} ${apellido} correctamente.`);
     res.status(201).json(personaCargada);
   } catch (error) {
     next(error);
@@ -204,9 +205,9 @@ export const getPersonaById = async (req, res, next) => {
 export const deletePersonaById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const persona = await Persona.findOneAndDelete(id);
+    const persona = await Persona.findByIdAndDelete(id);
     
-    res.status(200);
+    res.status(200).json(persona);
   } catch (err) {
     next(err);
   }
@@ -216,7 +217,7 @@ export const getPersonaByLastName = async (req, res, next) => {
   try {
     const queryApellido = req.body;
     const persona = await Persona.findOne(queryApellido);
-    res.json(persona);
+    res.status(200).json(persona);
   } catch (err) {
     next(err);
   }

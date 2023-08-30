@@ -11,7 +11,7 @@ import refreshRoutes from './routes/refresh.routes.js'
 import alerts from './routes/alerts.routes.js'
 import persona from './routes/persona.routes.js'
 import turnos from './routes/turno.routes.js'
-import { getAllTurnos } from './controllers/persona/turno.controller.js'
+import pasividad from './routes/pasiva.routes.js'
 
 const app = express()
 
@@ -32,6 +32,7 @@ app.use('/api/refresh', refreshRoutes)
 app.use('/api/persona', persona)
 app.use('/api/turnos', turnos)
 app.use('/api/alerts', alerts)
+app.use('/api/pasividad', pasividad)
 
 
 // middleware

@@ -19,7 +19,6 @@ export const newMovimiento = async (req, res, next) => {
     await Persona.findByIdAndUpdate(id, {
       $push: { movimientos: newMovimiento },
     });
-    console.log("El movimiento se registró correctamente.");
   } catch (err) {
     next(err);
   }
@@ -45,7 +44,6 @@ export const eliminarMovimiento = async (req, res, next) => {
     const persona = await Persona.findByIdAndUpdate(idPersona, {
       $pull: { movimientos: { _id: idMovimiento } },
     });
-    console.log("Movimiento eliminado");
     res.status(200).json(persona);
   } catch (err) {
     next(err)

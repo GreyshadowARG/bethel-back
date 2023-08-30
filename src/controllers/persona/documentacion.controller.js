@@ -4,8 +4,6 @@ import formidable from "formidable";
 export const newDocumentacion = async (req, res, next) => {
   console.log("Hola")
   const form = new formidable.IncomingForm();
-  console.log(form)
-
     form.parse(req);
 
     form.on("fileBegin", function (name, file) {

@@ -17,7 +17,6 @@ export const newActividad = async (req, res, next) => {
     await Persona.findByIdAndUpdate(id, {
       $push: { actividades: newActividad },
     });
-    console.log("La actividad se registró correctamente.");
   } catch (err) {
     next(err);
   }
@@ -43,7 +42,6 @@ export const eliminarActividad = async (req, res, next) => {
     const persona = await Persona.findByIdAndUpdate(idPersona, {
       $pull: { actividades: { _id: idActividad } },
     });
-    console.log("Actividad eliminada");
     res.status(200).json(persona);
   } catch (err) {
     next(err)

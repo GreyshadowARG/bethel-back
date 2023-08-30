@@ -6,6 +6,7 @@ import * as movimientoController from "../controllers/persona/movimiento.control
 import * as tratamientoController from "../controllers/persona/tratamiento.controller.js"
 import * as actividadController from "../controllers/persona/actividad.controller.js"
 import * as turnoController from "../controllers/persona/turno.controller.js"
+import * as pasivaController from "../controllers/persona/pasiva.controller.js"
 
 const router = Router()
 
@@ -43,7 +44,6 @@ router.get('/getAllActividades/:id', actividadController.getAllActividades);
 router.delete('/eliminarActividad/:idPersona/:idActividad', actividadController.eliminarActividad);
 
 //turnos
-router.post('/newTurno/:id', turnoController.newTurno);
 router.get('/getAllTurnos/:id', turnoController.getAllTurnos);
 router.delete('/eliminarTurno/:idPersona/:idTurno', turnoController.eliminarTurno);
 

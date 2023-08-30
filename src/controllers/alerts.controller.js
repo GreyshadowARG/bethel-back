@@ -65,6 +65,9 @@ export const getBirthdayDates = async (req, res, next) => {
 
   const presentDays = getToday();
 
+  const todayDate = new Date();
+  const currentMonth = todayDate.getMonth() + 1;
+
   personasArray.forEach((item) => {
     const fecha = item.fecha_nacimiento;
 
@@ -74,9 +77,7 @@ export const getBirthdayDates = async (req, res, next) => {
 
     const itemDays = getDaysPerMonth(month) + day;
 
-    if (itemDays < presentDays) {
-      console.log("Ya paso");
-    } else if (itemDays == presentDays) {
+    if (itemDays == presentDays) {
       arrayHoy.push({
         id: item._id,
         nombre: `${item.nombre} ${item.apellido}`,
@@ -90,7 +91,7 @@ export const getBirthdayDates = async (req, res, next) => {
         fecha_nacimiento: item.fecha_nacimiento,
         casa: item.casa,
       });
-    } else if (itemDays <= presentDays + 30 && itemDays  > presentDays) {
+    } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
       arrayProxMes.push({
         id: item._id,
         nombre: `${item.nombre} ${item.apellido}`,
@@ -99,8 +100,8 @@ export const getBirthdayDates = async (req, res, next) => {
       });
     }
   });
-  
-  res.json({
+
+  res.status(200).json({
     hoy: arrayHoy,
     proxSem: arrayProxSemana,
     proxMes: arrayProxMes,
@@ -171,42 +172,58 @@ export const getVencimientoCertif = async (req, res, next) => {
 
   const presentDays = getToday();
 
+  const todayDate = new Date();
+  const currentMonth = todayDate.getMonth() + 1;
+  const currentYear = todayDate.getFullYear();
+
   personasArray.forEach((item) => {
     const fecha = item.fecha_vencimiento_certificado;
 
     const daySplit = fecha.split("-");
     const day = Number(daySplit[0]);
     const month = Number(daySplit[1]);
+    const year = Number(daySplit[2]);
 
     const itemDays = getDaysPerMonth(month) + day;
 
-    if (itemDays < presentDays) {
-      console.log("Ya paso");
-    } else if (itemDays == presentDays) {
-      arrayHoy.push({
-        id: item._id,
-        nombre: `${item.nombre} ${item.apellido}`,
-        prestaciones_certificado: item.prestaciones_certificado,
-        fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
-      });
-    } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
-      arrayProxSemana.push({
-        id: item._id,
-        nombre: `${item.nombre} ${item.apellido}`,
-        prestaciones_certificado: item.prestaciones_certificado,
-        fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
-      });
-    } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
-      arrayProxMes.push({
-        id: item._id,
-        nombre: `${item.nombre} ${item.apellido}`,
-        prestaciones_certificado: item.prestaciones_certificado,
-        fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
-      });
+    if (year == currentYear || year == currentYear + 1) {
+      if (year == currentYear) {
+        if (itemDays == presentDays) {
+          arrayHoy.push({
+            id: item._id,
+            nombre: `${item.nombre} ${item.apellido}`,
+            prestaciones_certificado: item.prestaciones_certificado,
+            fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+          });
+        } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
+          arrayProxSemana.push({
+            id: item._id,
+            nombre: `${item.nombre} ${item.apellido}`,
+            prestaciones_certificado: item.prestaciones_certificado,
+            fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+          });
+        } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
+          arrayProxMes.push({
+            id: item._id,
+            nombre: `${item.nombre} ${item.apellido}`,
+            prestaciones_certificado: item.prestaciones_certificado,
+            fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+          });
+        }
+      } else if (year == currentYear + 1) {
+        if (month == 1 && currentMonth == 12) {
+          arrayProxMes.push({
+            id: item._id,
+            nombre: `${item.nombre} ${item.apellido}`,
+            prestaciones_certificado: item.prestaciones_certificado,
+            fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+          });
+        }
+      }
     }
   });
 
-  res.json({
+  res.status(200).json({
     hoy: arrayHoy,
     proxSem: arrayProxSemana,
     proxMes: arrayProxMes,
@@ -277,45 +294,62 @@ export const getTurnos = async (req, res, next) => {
 
   const presentDays = getToday();
 
+  const todayDate = new Date();
+  const currentMonth = 12;
+  const currentYear = todayDate.getFullYear();
+
   turnosArray.forEach((item) => {
     const fecha = item.dia_turno;
 
     const daySplit = fecha.split("-");
     const day = Number(daySplit[0]);
     const month = Number(daySplit[1]);
+    const year = Number(daySplit[2]);
 
     const itemDays = getDaysPerMonth(month) + day;
 
-    if (itemDays < presentDays) {
-      console.log("Ya paso");
-    } else if (itemDays == presentDays) {
-      arrayHoy.push({
-        id: item._id,
-        nombre: `${item.nombre}`,
-        tipo_turno: item.tipo_turno,
-        lugar_turno: item.lugar_turno,
-        dia_turno: item.dia_turno,
-      });
-    } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
-      arrayProxSemana.push({
-        id: item._id,
-        nombre: `${item.nombre}`,
-        tipo_turno: item.tipo_turno,
-        lugar_turno: item.lugar_turno,
-        dia_turno: item.dia_turno,
-      });
-    } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
-      arrayProxMes.push({
-        id: item._id,
-        nombre: `${item.nombre}`,
-        tipo_turno: item.tipo_turno,
-        lugar_turno: item.lugar_turno,
-        dia_turno: item.dia_turno,
-      });
+    if (year == currentYear || year == currentYear + 1) {
+      if (year == currentYear) {
+        if (itemDays == presentDays) {
+          arrayHoy.push({
+            id: item._id,
+            nombre: `${item.nombre}`,
+            tipo_turno: item.tipo_turno,
+            lugar_turno: item.lugar_turno,
+            dia_turno: item.dia_turno,
+          });
+        } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
+          arrayProxSemana.push({
+            id: item._id,
+            nombre: `${item.nombre}`,
+            tipo_turno: item.tipo_turno,
+            lugar_turno: item.lugar_turno,
+            dia_turno: item.dia_turno,
+          });
+        } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
+          arrayProxMes.push({
+            id: item._id,
+            nombre: `${item.nombre}`,
+            tipo_turno: item.tipo_turno,
+            lugar_turno: item.lugar_turno,
+            dia_turno: item.dia_turno,
+          });
+        }
+      } else if (year == currentYear + 1) {
+        if (month == 1 && currentMonth == 12) {
+          arrayProxMes.push({
+            id: item._id,
+            nombre: `${item.nombre}`,
+            tipo_turno: item.tipo_turno,
+            lugar_turno: item.lugar_turno,
+            dia_turno: item.dia_turno,
+          });
+        }
+      }
     }
   });
 
-  res.json({
+  res.status(200).json({
     hoy: arrayHoy,
     proxSem: arrayProxSemana,
     proxMes: arrayProxMes,
