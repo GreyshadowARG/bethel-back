@@ -2,7 +2,7 @@ import Persona from "../../models/Persona.js";
 
 export const editDatosPersonales = async (req, res, next) => {
   const { id } = req.params;
-  const { sexo, dni, edad, casa, peso, talle, fecha_nacimiento } = req.body;
+  const { nombre, apellido, sexo, dni, edad, casa, peso, talle, fecha_nacimiento } = req.body;
 
   const changeFormatDate = (fecha) => {
     const stringDay = String(fecha);
@@ -28,6 +28,8 @@ export const editDatosPersonales = async (req, res, next) => {
   try {
     const persona = await Persona.findByIdAndUpdate(id, {
       $set: {
+        nombre: nombre,
+        apellido: apellido,
         sexo: sexo,
         dni: dni,
         edad: edad,
