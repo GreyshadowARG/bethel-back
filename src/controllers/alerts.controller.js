@@ -83,6 +83,7 @@ export const getBirthdayDates = async (req, res, next) => {
         nombre: `${item.nombre} ${item.apellido}`,
         fecha_nacimiento: item.fecha_nacimiento,
         casa: item.casa,
+        cuenta: itemDays,
       });
     } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
       arrayProxSemana.push({
@@ -90,6 +91,7 @@ export const getBirthdayDates = async (req, res, next) => {
         nombre: `${item.nombre} ${item.apellido}`,
         fecha_nacimiento: item.fecha_nacimiento,
         casa: item.casa,
+        cuenta: itemDays,
       });
     } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
       arrayProxMes.push({
@@ -97,9 +99,20 @@ export const getBirthdayDates = async (req, res, next) => {
         nombre: `${item.nombre} ${item.apellido}`,
         fecha_nacimiento: item.fecha_nacimiento,
         casa: item.casa,
+        cuenta: itemDays,
       });
     }
   });
+
+  const orderData = (array) => {
+    array.sort(function(a, b){
+      return a.cuenta-b.cuenta
+    })
+  }
+
+  orderData(arrayHoy)
+  orderData(arrayProxSemana)
+  orderData(arrayProxMes)
 
   res.status(200).json({
     hoy: arrayHoy,
@@ -194,6 +207,7 @@ export const getVencimientoCertif = async (req, res, next) => {
             nombre: `${item.nombre} ${item.apellido}`,
             prestaciones_certificado: item.prestaciones_certificado,
             fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+            cuenta: itemDays,
           });
         } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
           arrayProxSemana.push({
@@ -201,6 +215,7 @@ export const getVencimientoCertif = async (req, res, next) => {
             nombre: `${item.nombre} ${item.apellido}`,
             prestaciones_certificado: item.prestaciones_certificado,
             fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+            cuenta: itemDays,
           });
         } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
           arrayProxMes.push({
@@ -208,6 +223,7 @@ export const getVencimientoCertif = async (req, res, next) => {
             nombre: `${item.nombre} ${item.apellido}`,
             prestaciones_certificado: item.prestaciones_certificado,
             fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+            cuenta: itemDays,
           });
         }
       } else if (year == currentYear + 1) {
@@ -217,11 +233,20 @@ export const getVencimientoCertif = async (req, res, next) => {
             nombre: `${item.nombre} ${item.apellido}`,
             prestaciones_certificado: item.prestaciones_certificado,
             fecha_vencimiento_certificado: item.fecha_vencimiento_certificado,
+            cuenta: itemDays,
           });
         }
       }
     }
   });
+
+  const orderData = (array) => {
+    array.sort(function(a, b){return a.cuenta-b.cuenta})
+  }
+
+  orderData(arrayHoy)
+  orderData(arrayProxSemana)
+  orderData(arrayProxMes)
 
   res.status(200).json({
     hoy: arrayHoy,
@@ -318,6 +343,7 @@ export const getTurnos = async (req, res, next) => {
             lugar_turno: item.lugar_turno,
             hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
+            cuenta: itemDays,
           });
         } else if (itemDays <= presentDays + 7 && itemDays > presentDays) {
           arrayProxSemana.push({
@@ -327,6 +353,7 @@ export const getTurnos = async (req, res, next) => {
             lugar_turno: item.lugar_turno,
             hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
+            cuenta: itemDays,
           });
         } else if (itemDays <= presentDays + 30 && itemDays > presentDays) {
           arrayProxMes.push({
@@ -336,6 +363,7 @@ export const getTurnos = async (req, res, next) => {
             lugar_turno: item.lugar_turno,
             hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
+            cuenta: itemDays,
           });
         }
       } else if (year == currentYear + 1) {
@@ -347,11 +375,20 @@ export const getTurnos = async (req, res, next) => {
             lugar_turno: item.lugar_turno,
             hora_turno: item.hora_turno,
             dia_turno: item.dia_turno,
+            cuenta: itemDays,
           });
         }
       }
     }
   });
+
+  const orderData = (array) => {
+    array.sort(function(a, b){return a.cuenta-b.cuenta})
+  }
+  
+  orderData(arrayHoy)
+  orderData(arrayProxSemana)
+  orderData(arrayProxMes)
 
   res.status(200).json({
     hoy: arrayHoy,

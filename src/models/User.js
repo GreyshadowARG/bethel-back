@@ -4,15 +4,7 @@ const { Schema, model } = pkg;
 
 const userSchema = new Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    email: {
+    username: {
       type: String,
       required: true,
     },
@@ -20,22 +12,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    reservations: {
-      pending: { type: Array },
-      approved: { type: Array },
-      completed: { type: Array },
-      canceled: { type: Array },
-    },
-    points: {
-      type: Number,
+    rol: {
+      type: String,
       required: true,
-    },
-    subscribed: {
-      type: Boolean,
-      required: true,
-    },
-    banned: {
-      type: Boolean,
     },
     refreshToken: String,
   },
