@@ -10,6 +10,8 @@ router.get('/getBirthdayDates', alertsController.getBirthdayDates);
 router.get('/getVencimientoCertif', alertsController.getVencimientoCertif);
 
 //turnos
-router.get('/getTurnos', alertsController.getTurnos);
+router.get('/getAllTurnos', alertsController.getTurnos);
+router.get('/getTurnosMedicos', alertsController.getTurnosMedicos);
+router.get('/getTurnosJudiciales', alertsController.getTurnosJudiciales);
 
 export default router
