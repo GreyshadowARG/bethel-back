@@ -6,6 +6,7 @@ const router = Router()
 //pasividad
 router.post('/pasarPasividad', pasivaController.pasarPasividad);
 router.get('/getPoblacionPasiva', pasivaController.getPoblacionPasiva);
+router.get('/getPasivaById/:id', pasivaController.getPasivaById);
 router.delete('/deletePasivaById/:pasivaId', pasivaController.deletePasivaById);
 
 export default router
